@@ -22,7 +22,8 @@ namespace Shkiya
 
         void Refresh()
         {
-            var client = new RestClient("https://ru.chabad.org/webservices/zmanim/zmanim/Get_Zmanim?locationid=247&locationtype=1&tdate=12-9-2021&jewish=Halachic-Times.htm&aid=143790&startdate=12%2F10%2F2021&enddate=12%2F10%2F2021");
+            var today = DateTime.UtcNow.Date.ToString("MM-dd-yyyy");
+            var client = new RestClient($"https://ru.chabad.org/webservices/zmanim/zmanim/Get_Zmanim?locationid=247&locationtype=1&tdate={today}&jewish=Halachic-Times.htm&aid=143790&startdate=12%2F10%2F2021&enddate=12%2F10%2F2021");
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
             request.AddHeader("authority", "ru.chabad.org");
@@ -35,7 +36,6 @@ namespace Shkiya
             request.AddHeader("sec-fetch-site", "same-origin");
             request.AddHeader("sec-fetch-mode", "cors");
             request.AddHeader("sec-fetch-dest", "empty");
-            var today = DateTime.UtcNow.Date.ToString("MM-dd-yyyy");
             label2.Text = today;
             request.AddHeader("referer", $"https://ru.chabad.org/calendar/zmanim_cdo/locationid/247/locationtype/1/tdate/{today}/jewish/Halachic-Times.htm");
             request.AddHeader("accept-language", "ru-BY,ru;q=0.9,en-US;q=0.8,en;q=0.7,he-IL;q=0.6,he;q=0.5,ru-RU;q=0.4");
