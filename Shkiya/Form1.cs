@@ -23,7 +23,8 @@ namespace Shkiya
         void Refresh()
         {
             var today = DateTime.UtcNow.Date.ToString("MM-dd-yyyy");
-            var client = new RestClient($"https://ru.chabad.org/webservices/zmanim/zmanim/Get_Zmanim?locationid=247&locationtype=1&tdate={today}&jewish=Halachic-Times.htm&aid=143790&startdate=12%2F10%2F2021&enddate=12%2F10%2F2021");
+            var arr = today.Split('-');
+            var client = new RestClient($"https://ru.chabad.org/webservices/zmanim/zmanim/Get_Zmanim?locationid=247&locationtype=1&tdate={today}&jewish=Halachic-Times.htm&aid=143790&startdate={arr[1]}%2F{arr[0]}%2F{arr[2]}&enddate={arr[1]}%2F{arr[0]}%2F{arr[2]}");
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
             request.AddHeader("authority", "ru.chabad.org");
